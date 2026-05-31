@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beckner Pu Calderon — Researcher & Builder</title>
+<meta name="description" content="Beckner Pu Calderon — Computer Science and Political Science at UMass Boston. Applied AI researcher building technology in service of community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEE3;
+    --paper-deep:#ECE4D5;
+    --card:#FBF7EE;
+    --ink:#1B1814;
+    --ink-soft:#574F44;
+    --ink-faint:#897F70;
+    --pine:#1E4A41;
+    --pine-deep:#163730;
+    --clay:#BC5836;
+    --line:rgba(27,24,20,0.13);
+    --line-strong:rgba(27,24,20,0.28);
+    /* terminal / cyber accents */
+    --term-bg:#0A0E12;
+    --term-panel:#0E141B;
+    --term-cyan:#34D8E8;
+    --term-green:#5EE08C;
+    --term-dim:#5C6B78;
+    --term-line:rgba(52,216,232,0.16);
+    --display:"Fraunces",Georgia,serif;
+    --body:"Hanken Grotesk",-apple-system,sans-serif;
+    --mono:"IBM Plex Mono",monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection{background:var(--pine);color:var(--paper);}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+  .mono{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:background .4s ease,padding .4s ease,box-shadow .4s ease;}
+  nav.scrolled{background:rgba(244,238,227,0.85);backdrop-filter:blur(12px);padding:14px 40px;box-shadow:0 1px 0 var(--line);}
+  .nav-mark{font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:-0.01em;}
+  .nav-mark span{color:var(--clay);}
+  .nav-links{display:flex;gap:30px;}
+  .nav-links a{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);position:relative;transition:color .25s;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--clay);transition:width .3s ease;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+  @media(max-width:720px){.nav-links{display:none;}}
+
+  /* HERO */
+  header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px;}
+  .hero-deco{position:absolute;top:14%;right:-6%;width:46vw;max-width:620px;height:auto;opacity:0.5;pointer-events:none;z-index:0;}
+  .hero-inner{position:relative;z-index:2;}
+  .hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+  .hero-eyebrow .bar{height:1px;width:46px;background:var(--clay);}
+
+  /* terminal status nod in hero */
+  .boot{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.04em;color:var(--ink-faint);margin-bottom:34px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .boot .ok{color:var(--pine);font-weight:600;}
+  .boot .blink{display:inline-block;width:8px;height:14px;background:var(--clay);animation:blink 1.1s steps(1) infinite;vertical-align:middle;}
+  @keyframes blink{0%,50%{opacity:1;}51%,100%{opacity:0;}}
+
+  h1.hero-name{font-family:var(--display);font-weight:600;font-size:clamp(3.4rem,9vw,8.2rem);line-height:0.93;letter-spacing:-0.03em;margin-bottom:30px;cursor:default;}
+  h1.hero-name em{font-style:italic;font-weight:400;color:var(--pine);}
+  /* GLITCH */
+  .glitch.go{animation:glitchKey .55s steps(2) 1;}
+  h1.hero-name:hover{animation:glitchKey .45s steps(2) 1;}
+  @keyframes glitchKey{
+    0%{text-shadow:none;transform:none;}
+    15%{text-shadow:-3px 0 var(--term-cyan),3px 0 var(--clay);transform:translate(2px,-1px) skewX(-1deg);}
+    30%{text-shadow:3px 0 var(--term-cyan),-3px 0 var(--clay);transform:translate(-2px,1px);}
+    45%{text-shadow:-2px 0 var(--term-cyan),2px 0 var(--clay);transform:translate(1px,0);}
+    60%{text-shadow:2px 0 var(--clay),-2px 0 var(--term-cyan);transform:translate(-1px,-1px) skewX(1deg);}
+    80%{text-shadow:-1px 0 var(--term-cyan),1px 0 var(--clay);transform:none;}
+    100%{text-shadow:none;transform:none;}
+  }
+
+  .hero-tagline{font-family:var(--display);font-weight:400;font-size:clamp(1.35rem,2.9vw,2.15rem);line-height:1.28;letter-spacing:-0.01em;max-width:780px;color:var(--ink);margin-bottom:30px;}
+  .hero-tagline b{font-weight:600;color:var(--pine);font-style:normal;}
+  .hero-sub{max-width:560px;font-size:1.06rem;color:var(--ink-soft);line-height:1.7;}
+  .hero-meta{margin-top:54px;display:flex;gap:38px;flex-wrap:wrap;}
+  .hero-meta .item{display:flex;flex-direction:column;gap:5px;}
+  .hero-meta .item .k{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+  .hero-meta .item .v{font-weight:600;font-size:0.96rem;color:var(--ink);}
+  .scroll-cue{position:absolute;bottom:40px;left:0;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);}
+  .scroll-cue .dot{width:7px;height:7px;border-radius:50%;background:var(--clay);animation:pulse 2s infinite ease-in-out;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.6);}}
+
+  /* SECTION SHELL */
+  section{padding:120px 0;position:relative;}
+  .sec-head{display:flex;align-items:baseline;gap:20px;margin-bottom:64px;border-bottom:1px solid var(--line);padding-bottom:24px;}
+  .sec-head .num{font-family:var(--mono);font-size:0.8rem;color:var(--clay);letter-spacing:0.1em;padding-top:6px;}
+  .sec-head h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,4.4vw,3.1rem);letter-spacing:-0.02em;line-height:1;}
+
+  /* CURRENTLY status band */
+  #now{background:var(--pine-deep);padding:54px 0;position:relative;overflow:hidden;}
+  #now::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(52,216,232,0.05) 0px,rgba(52,216,232,0.05) 1px,transparent 1px,transparent 4px);opacity:.5;}
+  .now-inner{position:relative;z-index:2;}
+  .now-head{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--term-cyan);margin-bottom:26px;display:flex;align-items:center;gap:12px;}
+  .now-head .live{width:8px;height:8px;border-radius:50%;background:var(--term-green);box-shadow:0 0 0 0 rgba(94,224,140,.6);animation:live 1.8s infinite;}
+  @keyframes live{0%{box-shadow:0 0 0 0 rgba(94,224,140,.55);}70%{box-shadow:0 0 0 9px rgba(94,224,140,0);}100%{box-shadow:0 0 0 0 rgba(94,224,140,0);}}
+  .now-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 60px;}
+  @media(max-width:760px){.now-grid{grid-template-columns:1fr;}}
+  .now-row{font-family:var(--mono);font-size:0.92rem;color:rgba(244,238,227,0.9);display:flex;gap:14px;padding:9px 0;border-bottom:1px solid rgba(244,238,227,0.1);}
+  .now-row .lbl{color:var(--term-cyan);min-width:118px;font-weight:500;}
+  .now-row .val b{color:#fff;font-weight:600;}
+
+  /* ABOUT */
+  #about{background:var(--paper-deep);}
+  .about-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:70px;align-items:start;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:34px;}}
+  .about-aside .tag{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);display:block;padding:11px 0;border-bottom:1px solid var(--line);}
+  .about-aside .tag:first-child{border-top:1px solid var(--line);}
+  .about-aside .tag b{color:var(--clay);}
+  .edu-card{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;}
+  .edu-card .ek{font-family:var(--mono);font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px;}
+  .edu-card h4{font-family:var(--display);font-weight:600;font-size:1.18rem;letter-spacing:-0.01em;margin-bottom:3px;}
+  .edu-card .deg{font-size:0.92rem;color:var(--ink-soft);}
+  .edu-card .deg .pine{color:var(--pine);font-weight:600;}
+  .about-body p{font-size:1.18rem;line-height:1.72;color:var(--ink);margin-bottom:24px;}
+  .about-body p:last-child{margin-bottom:0;}
+  .about-body .lead{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.4;letter-spacing:-0.01em;}
+  .about-body strong{color:var(--pine);font-weight:600;}
+
+  /* WORK */
+  .work-list{display:flex;flex-direction:column;}
+  .work{display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:start;padding:38px 0;border-top:1px solid var(--line);position:relative;transition:padding-left .4s cubic-bezier(.2,.7,.2,1);}
+  .work:last-child{border-bottom:1px solid var(--line);}
+  .work::before{content:"";position:absolute;left:-24px;top:0;bottom:0;width:2px;background:var(--clay);transform:scaleY(0);transform-origin:top;transition:transform .4s ease;}
+  .work:hover{padding-left:24px;}
+  .work:hover::before{transform:scaleY(1);}
+  .work .idx{font-family:var(--mono);font-size:0.8rem;color:var(--ink-faint);padding-top:8px;}
+  .work .body h3{font-family:var(--display);font-weight:600;font-size:1.6rem;letter-spacing:-0.01em;line-height:1.1;margin-bottom:12px;transition:color .25s;}
+  .work:hover .body h3{color:var(--pine);}
+  .work .body p{color:var(--ink-soft);font-size:1.02rem;line-height:1.62;max-width:640px;margin-bottom:16px;}
+  .work .tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .work .tags span{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:100px;padding:4px 11px;}
+  .work .role{text-align:right;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--clay);padding-top:8px;white-space:nowrap;}
+  @media(max-width:760px){.work{grid-template-columns:1fr;gap:14px;}.work .idx{display:none;}.work .role{text-align:left;}}
+
+  /* EXPERIENCE */
+  #experience{background:var(--pine-deep);color:var(--paper);}
+  #experience .sec-head{border-color:rgba(244,238,227,0.18);}
+  #experience .sec-head h2{color:var(--paper);}
+  #experience .sec-head .num{color:#E0A57E;}
+  .exp{display:grid;grid-template-columns:1fr 2.1fr;gap:40px;padding:34px 0;border-top:1px solid rgba(244,238,227,0.16);}
+  .exp:last-child{border-bottom:1px solid rgba(244,238,227,0.16);}
+  .exp .when{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.06em;color:#E0A57E;padding-top:6px;}
+  .exp .what h3{font-family:var(--display);font-weight:500;font-size:1.45rem;letter-spacing:-0.01em;margin-bottom:4px;color:var(--paper);}
+  .exp .what .org{font-size:0.92rem;color:rgba(244,238,227,0.62);margin-bottom:14px;font-weight:500;}
+  .exp .what p{font-size:1rem;line-height:1.62;color:rgba(244,238,227,0.82);max-width:620px;}
+  @media(max-width:760px){.exp{grid-template-columns:1fr;gap:10px;}}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:54px;}
+  @media(max-width:760px){.skills-grid{grid-template-columns:1fr;gap:34px;}}
+  .skill-col h4{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid var(--line);}
+  .skill-col ul{list-style:none;display:flex;flex-wrap:wrap;gap:9px;}
+  .skill-col li{font-size:0.92rem;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:7px;padding:8px 14px;transition:transform .2s ease,border-color .2s ease;}
+  .skill-col li:hover{transform:translateY(-2px);border-color:var(--pine);}
+
+  /* VISION */
+  #vision{background:var(--paper-deep);}
+  .vision-block{max-width:880px;}
+  .vision-block p{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.36;letter-spacing:-0.02em;color:var(--ink);}
+  .vision-block p .hl{color:var(--pine);font-style:italic;}
+
+  /* CONTACT — TERMINAL */
+  footer{padding:120px 0 70px;}
+  .contact-head{margin-bottom:46px;}
+  .contact-head h2{font-family:var(--display);font-weight:600;font-size:clamp(2.6rem,7vw,5rem);line-height:0.95;letter-spacing:-0.03em;}
+  .contact-head h2 em{font-style:italic;font-weight:400;color:var(--clay);}
+  .contact-head p{margin-top:16px;font-size:1.05rem;color:var(--ink-soft);max-width:520px;}
+
+  .terminal{
+    background:var(--term-bg);border:1px solid #1c2733;border-radius:12px;overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.5),0 0 0 1px rgba(52,216,232,0.06);
+    font-family:var(--mono);position:relative;
+  }
+  .terminal::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(52,216,232,0.04) 0px,rgba(52,216,232,0.04) 1px,transparent 1px,transparent 3px);opacity:.6;}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:13px 16px;background:var(--term-panel);border-bottom:1px solid #1c2733;}
+  .term-dot{width:11px;height:11px;border-radius:50%;}
+  .term-dot.r{background:#ff5f56;}.term-dot.y{background:#ffbd2e;}.term-dot.g{background:#27c93f;}
+  .term-title{margin-left:10px;font-size:0.74rem;color:var(--term-dim);letter-spacing:0.02em;}
+  .term-status{margin-left:auto;font-size:0.68rem;color:var(--term-green);display:flex;align-items:center;gap:7px;}
+  .term-status .d{width:7px;height:7px;border-radius:50%;background:var(--term-green);box-shadow:0 0 8px var(--term-green);}
+  .term-body{padding:26px 24px 30px;position:relative;z-index:2;min-height:230px;}
+  .term-line{font-size:0.94rem;color:#cfe9ee;margin-bottom:6px;}
+  .prompt{color:var(--term-green);font-weight:600;}
+  .prompt .at{color:var(--term-cyan);}
+  .typed{color:#eaf6f8;}
+  .cursor{display:inline-block;width:9px;height:1.05em;background:var(--term-cyan);vertical-align:text-bottom;margin-left:2px;animation:blink 1.05s steps(1) infinite;}
+  .term-out{opacity:0;transform:translateY(6px);transition:opacity .5s ease,transform .5s ease;margin-top:14px;}
+  .term-out.show{opacity:1;transform:none;}
+  .term-comment{color:var(--term-dim);font-size:0.9rem;line-height:1.7;}
+  .term-comment .grn{color:var(--term-green);}
+  .term-link{display:flex;align-items:center;gap:14px;padding:9px 0;font-size:0.96rem;color:#dceef1;transition:color .2s,transform .2s;width:fit-content;flex-wrap:wrap;}
+  .term-link .k{color:var(--term-cyan);min-width:96px;display:inline-block;font-weight:500;}
+  .term-link .arw{color:var(--term-dim);}
+  .term-link:hover{color:#fff;transform:translateX(6px);}
+  .term-link:hover .arw{color:var(--term-green);}
+  .term-link:hover .k{text-shadow:0 0 10px rgba(52,216,232,0.55);}
+
+  .foot-base{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:30px;margin-top:50px;border-top:1px solid var(--line);}
+  .foot-base .mono{font-size:0.68rem;}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,.7,.3,1),transform .9s cubic-bezier(.16,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .hidefx{opacity:0;transform:translateY(34px);}
+  .load .hidefx{animation:up .95s cubic-bezier(.16,.7,.3,1) forwards;}
+  @keyframes up{to{opacity:1;transform:none;}}
+  .d1{animation-delay:.08s;}.d2{animation-delay:.20s;}.d3{animation-delay:.34s;}
+  .d4{animation-delay:.48s;}.d5{animation-delay:.62s;}.d6{animation-delay:.76s;}
+
+  @media(max-width:720px){
+    .wrap{padding:0 22px;}
+    nav,nav.scrolled{padding-left:22px;padding-right:22px;}
+    section{padding:84px 0;}
+    body{font-size:16px;}
+    .term-body{padding:22px 16px 26px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+    .reveal{opacity:1;transform:none;}
+    .hidefx{opacity:1;transform:none;}
+    .term-out{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="nav-mark">BPC<span>.</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#vision">Vision</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<a id="top"></a>
+<header>
+  <svg class="hero-deco hidefx d2" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#1E4A41" stroke-width="1" opacity="0.55">
+      <circle cx="300" cy="300" r="60"/><circle cx="300" cy="300" r="115"/>
+      <circle cx="300" cy="300" r="170"/><circle cx="300" cy="300" r="225"/><circle cx="300" cy="300" r="280"/>
+    </g>
+    <g stroke="#BC5836" stroke-width="1.4" opacity="0.8">
+      <line x1="300" y1="20" x2="300" y2="580"/><line x1="20" y1="300" x2="580" y2="300"/>
+    </g>
+    <circle cx="300" cy="300" r="6" fill="#BC5836"/>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow hidefx d1">
+      <span class="bar"></span>
+      <span class="mono">Researcher &nbsp;·&nbsp; Builder &nbsp;·&nbsp; First-Generation Scholar</span>
+    </div>
+
+    <div class="boot hidefx d1">
+      <span class="ok">[ ok ]</span> initializing&nbsp;profile&nbsp;//&nbsp;tech&nbsp;+&nbsp;policy&nbsp;+&nbsp;community <span class="blink"></span>
+    </div>
+
+    <h1 class="hero-name glitch" id="heroName">Beckner<br>Pu&nbsp;<em>Calderon</em></h1>
+
+    <p class="hero-tagline hidefx d3">Building at the intersection of <b>technology, policy, and community.</b></p>
+
+    <p class="hero-sub hidefx d4">Computer Science &amp; Political Science at the University of Massachusetts Boston. I build applied-AI tools that hold up technically and serve the people too often left out of the room — from medical imaging to civic transparency to accessible communication.</p>
+
+    <div class="hero-meta hidefx d5">
+      <div class="item"><span class="k">Studying</span><span class="v">CS &amp; Political Science</span></div>
+      <div class="item"><span class="k">At</span><span class="v">UMass Boston · '27</span></div>
+      <div class="item"><span class="k">Researcher</span><span class="v">IMPACT · Team 1 Lead</span></div>
+      <div class="item"><span class="k">Based in</span><span class="v">Boston, MA</span></div>
+    </div>
+  </div>
+
+  <div class="wrap"><div class="scroll-cue hidefx d6"><span class="dot"></span>Scroll</div></div>
+</header>
+
+<!-- CURRENTLY -->
+<section id="now">
+  <div class="wrap now-inner">
+    <div class="now-head reveal"><span class="live"></span>// currently</div>
+    <div class="now-grid">
+      <div class="now-row reveal"><span class="lbl">building</span><span class="val"><b>INIA</b> — medical image segmentation API</span></div>
+      <div class="now-row reveal"><span class="lbl">researching</span><span class="val">accessible communication <b>(AAC)</b> — toward publication</span></div>
+      <div class="now-row reveal"><span class="lbl">leading</span><span class="val">Team 1 <b>(UNet architectures)</b> at IMPACT</span></div>
+      <div class="now-row reveal"><span class="lbl">studying</span><span class="val">CS + Political Science <b>→ Dec 2027</b></span></div>
+      <div class="now-row reveal"><span class="lbl">exploring</span><span class="val">machine perception &amp; civic technology</span></div>
+      <div class="now-row reveal"><span class="lbl">open to</span><span class="val"><b>research · collaboration · conversations</b></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <aside class="about-aside reveal">
+        <span class="tag"><b>First-generation</b> college student</span>
+        <span class="tag">From <b>Guatemala</b>, raised in Massachusetts</span>
+        <span class="tag">Vocational-track <b>→</b> research lab</span>
+        <span class="tag">Honor Roll · Clean Energy Career Scholar</span>
+        <span class="tag">Studies <b>gender, immigration &amp; Latino politics</b></span>
+        <div class="edu-card">
+          <div class="ek">Education</div>
+          <h4>University of Massachusetts Boston</h4>
+          <div class="deg">B.A. <span class="pine">Computer Science</span> + Political Science<br>Expected December 2027</div>
+        </div>
+      </aside>
+      <div class="about-body reveal">
+        <p class="lead">I'm less interested in technology for its own sake than in what it can do for people who are usually overlooked.</p>
+        <p>I'm a first-generation college student studying Computer Science and Political Science at the University of Massachusetts Boston. I came to the United States from Guatemala as a child, and the road here ran through a regional technical high school and a plumbing trade — and a lot of catching up — before it ran through a research lab.</p>
+        <p>That route shapes how I work. I build things that are <strong>technically serious</strong> and put them in service of something <strong>human</strong>: patients, immigrants, families navigating systems that were never built for them. I lead a research team, I organize communities, and I try to keep both hands on the same problem.</p>
+        <p>I'm working toward a future that bridges <strong>engineering, law, and public service</strong> — and a long-term commitment to the communities I come from, in the United States and in Latin America.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">02</span><h2>Selected&nbsp;Work</h2></div>
+    <div class="work-list">
+
+      <article class="work reveal">
+        <span class="idx">/01</span>
+        <div class="body">
+          <h3>INIA — Unified Medical Image Segmentation API</h3>
+          <p>A single Python API for benchmarking four leading deep-learning segmentation architectures — UNet, UNet++, UNet3++, and nnUNet — under identical conditions. Built as Team 1 Lead in UMass Boston's IMPACT research program, with aligned outputs that feed downstream teams working on foundation-model segmentation. Top model reached a Dice score of 0.987.</p>
+          <div class="tags"><span>Python</span><span>Deep Learning</span><span>Computer Vision</span><span>Research API</span></div>
+        </div>
+        <div class="role">Lead Developer<br>&amp; Team Lead</div>
+      </article>
+
+      <article class="work reveal">
+        <span class="idx">/02</span>
+        <div class="body">
+          <h3>Civic Transparency Infrastructure</h3>
+          <p>Modular ETL pipelines that merge Guatemalan public-procurement data with government budget-execution records to make spending traceable. Entity resolution, fuzzy matching, and a database-ready pipeline built to surface where public money actually goes — technology in service of accountability.</p>
+          <div class="tags"><span>Python</span><span>PostgreSQL</span><span>Data Engineering</span><span>Civic Tech</span></div>
+        </div>
+        <div class="role">Builder</div>
+      </article>
+
+      <article class="work reveal">
+        <span class="idx">/03</span>
+        <div class="body">
+          <h3>Accessible Communication Research</h3>
+          <p>Research toward a multi-modal augmentative and alternative communication (AAC) system designed to help people with complex communication needs — and the families who love them — have real conversations. Currently in development as a research publication.</p>
+          <div class="tags"><span>Human-Centered AI</span><span>Accessibility</span><span>Research</span></div>
+        </div>
+        <div class="role">Researcher</div>
+      </article>
+
+      <article class="work reveal">
+        <span class="idx">/04</span>
+        <div class="body">
+          <h3>Maritime Intelligence Systems</h3>
+          <p>Contributing to applied-AI work on intelligent systems for maritime ship management and operational safety, as part of IMPACT's multi-team research program at the UMass Boston Venture Development Center.</p>
+          <div class="tags"><span>Applied AI</span><span>Systems</span></div>
+        </div>
+        <div class="role">Researcher</div>
+      </article>
+
+      <article class="work reveal">
+        <span class="idx">/05</span>
+        <div class="body">
+          <h3>O&nbsp;V Landscape — Full-Stack Platform</h3>
+          <p>An end-to-end web platform for a family landscaping business, featuring a customer loyalty system and an owner admin dashboard. Designed, built, and deployed from scratch — proof that the engineering reaches all the way to shipped product.</p>
+          <div class="tags"><span>React</span><span>Tailwind CSS</span><span>Full-Stack</span><span>Vercel</span></div>
+        </div>
+        <div class="role">Full-Stack<br>Developer</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03</span><h2>Experience</h2></div>
+
+    <div class="exp reveal">
+      <div class="when">Feb 2026 — Present</div>
+      <div class="what">
+        <h3>Researcher · Team 1 Lead</h3>
+        <div class="org">IMPACT — UMass Boston Venture Development Center</div>
+        <p>Lead a team building UNet-family segmentation architectures within a multi-team applied-AI research program. Built INIA and coordinate deliverables, test indices, and handoffs across collaborating teams.</p>
+      </div>
+    </div>
+
+    <div class="exp reveal">
+      <div class="when">Feb 2025 — May 2025</div>
+      <div class="what">
+        <h3>Education Coordinator</h3>
+        <div class="org">John F. Kennedy Library Foundation</div>
+        <p>Supported public programming for K-12 students, families, and adult learners in the Outreach, Education &amp; Engagement department — taking on expanded responsibilities during a period of institutional transition.</p>
+      </div>
+    </div>
+
+    <div class="exp reveal">
+      <div class="when">Sep 2024 — Apr 2025</div>
+      <div class="what">
+        <h3>Community Leader</h3>
+        <div class="org">Native &amp; Indigenous Student Association (NISA) — UMass Boston</div>
+        <p>Led monthly programming and built cross-institutional partnerships with peer Native and Indigenous student organizations at Harvard, MIT, Tufts, Brown, and Wellesley, while managing the organization's outreach and community presence.</p>
+      </div>
+    </div>
+
+    <div class="exp reveal">
+      <div class="when">Sep 2023 — Mar 2025</div>
+      <div class="what">
+        <h3>Community Liaison</h3>
+        <div class="org">Immigrant Student Program — UMass Boston</div>
+        <p>Supported immigrant and undocumented students through programming, advocacy, and one-on-one outreach — helping build trust between the program and the wider campus community.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">04</span><h2>Capabilities</h2></div>
+    <div class="skills-grid">
+      <div class="skill-col reveal">
+        <h4>Engineering</h4>
+        <ul>
+          <li>Python</li><li>Machine Learning</li><li>Deep Learning</li><li>Computer Vision</li>
+          <li>React</li><li>TypeScript</li><li>PostgreSQL</li><li>Data Engineering</li><li>Git</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Research &amp; Domain</h4>
+        <ul>
+          <li>Medical Image Segmentation</li><li>Applied AI</li><li>Civic Technology</li>
+          <li>Human-Centered Design</li><li>Public Policy</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Community &amp; Leadership</h4>
+        <ul>
+          <li>Community Organizing</li><li>Program Building</li><li>Conflict Mediation</li>
+          <li>Cross-Functional Collaboration</li><li>Public Speaking</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Languages</h4>
+        <ul>
+          <li>Spanish — Native</li><li>English — Fluent</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="wrap">
+    <div class="vision-block">
+      <div class="sec-head reveal" style="border:none;padding:0;margin-bottom:36px;"><span class="num">05</span><h2 style="font-size:clamp(1.6rem,3.5vw,2.3rem);">What I'm building toward</h2></div>
+      <p class="reveal">A career that refuses to choose between <span class="hl">rigor and care</span> — technology that holds up technically and serves people honestly, carried in time into <span class="hl">law, policy, and public service</span> for the communities I come from, on both sides of a border.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-head reveal">
+      <h2>Let's build <em>something.</em></h2>
+      <p>Always open to research, collaboration, and a good conversation. The fastest way to reach me is below — I read everything.</p>
+    </div>
+
+    <div class="terminal reveal">
+      <div class="term-bar">
+        <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+        <span class="term-title">contact — beckner@portfolio: ~</span>
+        <span class="term-status"><span class="d"></span>online</span>
+      </div>
+      <div class="term-body">
+        <p class="term-line"><span class="prompt">visitor<span class="at">@</span>bpc</span>:~$ <span class="typed" id="typed1"></span><span class="cursor" id="cur1"></span></p>
+        <div class="term-out" id="out1">
+          <p class="term-comment"><span class="grn"># reach out — open channels:</span></p>
+          <br>
+          <a class="term-link" href="https://www.linkedin.com/in/beckner-pu-calderon" target="_blank" rel="noopener"><span class="k">linkedin</span><span class="arw">→</span> in/beckner-pu-calderon</a>
+          <a class="term-link" href="https://github.com/beckner1044-crypto" target="_blank" rel="noopener"><span class="k">github</span><span class="arw">→</span> beckner1044-crypto</a>
+          <a class="term-link" href="mailto:beckner1044@gmail.com"><span class="k">email</span><span class="arw">→</span> beckner1044@gmail.com</a>
+          <br>
+          <p class="term-comment">$ connection established. <span class="grn">_</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-base">
+      <span class="mono">© 2026 Beckner Pu Calderon</span>
+      <span class="mono">Boston, Massachusetts</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav scroll state
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40);};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // hero load + glitch
+  document.body.classList.add('load');
+  const heroName=document.getElementById('heroName');
+  setTimeout(()=>{heroName.classList.add('go');setTimeout(()=>heroName.classList.remove('go'),600);},950);
+
+  // scroll reveals
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.14,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(Math.min(i%4,3)*0.07)+'s';io.observe(el);});
+
+  // terminal typing — triggers when scrolled into view
+  const cmd="cat contact.txt";
+  const typedEl=document.getElementById('typed1');
+  const curEl=document.getElementById('cur1');
+  const outEl=document.getElementById('out1');
+  let typedDone=false;
+  function runType(){
+    if(typedDone)return;typedDone=true;
+    let i=0;
+    (function step(){
+      if(i<=cmd.length){typedEl.textContent=cmd.slice(0,i);i++;setTimeout(step,68);}
+      else{curEl.style.display='none';outEl.classList.add('show');}
+    })();
+  }
+  const tIO=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){runType();tIO.disconnect();}});
+  },{threshold:0.4});
+  tIO.observe(document.querySelector('.terminal'));
+</script>
+</body>
+</html>
